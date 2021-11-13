@@ -3,6 +3,6 @@ project(TexasHandem)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(TexasHandem main.cpp)
 
-add_executable(Player Player.cpp)
+
+add_executable(main main.cpp)
