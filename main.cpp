@@ -33,7 +33,7 @@ int main(){
     add(River_Card);
     vector<pair<int,char>>Player_arr{};
     vector<pair<int,char>>opponent_arr;
-    vector<pair<int,char>>test_arr{{9,'B'},{9,'A'},{9,'C'},{11,'A'},{10,'B'},{10,'A'},{12,'A'}};
+    vector<pair<int,char>>test_arr{{5,'B'},{9,'A'},{5,'D'},{5,'A'},{3,'B'},{5,'C'},{11,'A'}};
     /*构造玩家牌种序列*/
     Player_arr.insert(Player_arr.cbegin(),River_Card.begin(),River_Card.end());
     Player_arr.insert(Player_arr.cbegin(),player.Poker.begin(),player.Poker.end());
@@ -75,15 +75,15 @@ int main(){
     }else{
         cout<<"not straight_wh"<<endl;
     }
-    if(judge_straight_w(test_arr)){
-        cout<<"test straight_w"<<endl;
+    if(judge_Four(test_arr)){
+        cout<<"test Four"<<endl;
     }else{
-        cout<<"not straight_w"<<endl;
+        cout<<"not Four"<<endl;
     }
-    if(judge_twopair(test_arr)){
-        cout<<"test two_pair"<<endl;
+    if(judge_single(test_arr)){
+        cout<<"test singel"<<endl;
     }else{
-        cout<<"not two_pair"<<endl;
+        cout<<"not single"<<endl;
     }
     if(judge_Three_beltTwo(test_arr)){
         cout<<"test ThreebeltTwo"<<endl;

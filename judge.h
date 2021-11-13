@@ -54,14 +54,18 @@ bool judge_Three(const std::vector<std::pair<int,char>>&arr){
 } 
 bool judge_twopair(const std::vector<std::pair<int,char>>&arr){ //判两对
     std::map<int,int>count;  //第一个int表示牌点 第二个int表示出现的次数
-    int count1=0;   //记录对子个数
+    int count2=0;   //记录对子个数
     for(int i=0;i!=arr.size();++i){
         ++count[arr[i].first];
-        if(count[arr[i].first]==2){
-            ++count1;
+    }
+    for(auto it=count.begin();it!=count.end();++it){
+        if(count[it->first]>=pow(2,1)&&count[it->first]<pow(2,2)){
+            count2+=1;
+        }else if(count[it->first]==pow(2,2)){
+            count2+=2;
         }
     }
-    if(count1>=2){
+    if(count2>=2){
         return true;
     }else{
         return false;
@@ -214,4 +218,58 @@ bool judge_Three_beltTwo(const std::vector<std::pair<int,char>>&arr){
         return false;
     }
 }
+bool judge_single(const std::vector<std::pair<int,char>>&arr) //判gao
+{     //参数:手牌与河牌组成的牌组
+    auto it=arr;
+    auto hi=arr;
+    sort(it.begin(), it.end());
+    for(auto & i : it){
+        i.second='#';
+    }
+    it.erase(unique(it.begin(),it.end()),it.end());
+    for(auto i=0;i+4<it.size();++i){
+        if((it[i+4].first-it[i].first)==4){
+            return false;
+        }else{
+            continue;
+        }
+    }
+    int count1=0,count2=0,count3=0,count4=0;
+    int count=0;
+    for(int i=0;i<it.size();i++){
+     if(hi[i].second=='A') {
+      count1++;
+      if(count1>=5) {
+   count=1;  
+   }
+  }
+  else if(hi[i].second=='B') {
+      count2++;
+      if(count2>=5) {
+   count=2;  
+   } 
+  }
+  else if(hi[i].second=='C') {
+   count3++;
+      if(count3>=5) {
+   count=3;  
+   }
+  }
+  else if(hi[i].second=='D') {
+   count4++;
+      if(count4>=5) {
+   count=4;  
+   }
+  } 
+ }
+ if(count!=0) return false;
+ for(int i=0;i<hi.size();i++){
+  for(int j=i+1;j<hi.size();j++){
+  if(hi[i].first==hi[j].first)
+  return false;   
+  }
+ }
+    return true;
+}
+
 #endif //TEXASHANDEM_JUDGE_H
