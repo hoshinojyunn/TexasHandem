@@ -6,3 +6,5 @@ set(CMAKE_CXX_STANDARD 14)
 
 
 add_executable(main main.cpp)
+add_executable(relie jackPot.cpp)
+add_executable(Player Player.cpp)

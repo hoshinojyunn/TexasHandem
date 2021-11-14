@@ -72,7 +72,7 @@ void RiverCard(std::vector<std::pair<int,char>>&River_Card){
         else i--;
     }
 }
-void add(std::vector<std::pair<int,char>>&River_Card){
+void add(std::vector<std::pair<int, char>> &River_Card, int i1) {
     srand(time(nullptr));
     for(int i=0;i<1;i++){
         int num=0;               //单张纸牌大小
