@@ -5,11 +5,12 @@
 #define TEXASHANDEM_POKER_H
 #include<iostream>
 #include<cstdlib>
+#include<vector>
 const int N=13;
 const int M=4;
 const int R=0;
 const int E=1;
-int paper_num[N+1][M+1]={};
+int paper_num[N+1][M+1];
 typedef struct {
     int card_point;
     char suit;
@@ -72,7 +73,7 @@ void RiverCard(std::vector<std::pair<int,char>>&River_Card){
         else i--;
     }
 }
-void add(std::vector<std::pair<int, char>> &River_Card, int i1) {
+void add(std::vector<std::pair<int, char>> &River_Card) {
     srand(time(nullptr));
     for(int i=0;i<1;i++){
         int num=0;               //单张纸牌大小
@@ -101,6 +102,17 @@ void add(std::vector<std::pair<int, char>> &River_Card, int i1) {
     }
 }
 //函数返回桌面上是否有三张或三张以上花色相同的牌
+void clearPoker(std::vector<std::pair<int,char>>&playerPoker,std::vector<std::pair<int,char>>&opponentPoker,std::vector<std::pair<int,char>>River_Card){
+    playerPoker.clear();
+    opponentPoker.clear();
+    River_Card.clear();
+    memset(paper_num,0,sizeof(paper_num));
+}
+void clearPoker(std::vector<std::pair<int,char>>&playerPoker,std::vector<std::pair<int,char>>&opponentPoker){
+    playerPoker.clear();
+    opponentPoker.clear();
+    memset(paper_num,0,sizeof(paper_num));
+}
 int whea(basepap z,int n){
     int count1=0;
     int count2=0;
