@@ -222,16 +222,18 @@ string machine_make_plan(const Player&opponent,const Player&player,vector<pair<i
     return i->first;
 }
 
-void Round1(Player &player, Player &opponent, jackPot &pot)
+void Round1(Player &player, Player &opponent, jackPot &pot) //游戏流程设计
 { //发手牌阶段
     string flag;
     srand(time(nullptr));
     cout << "start the game?yes or no?"<<endl;
-    vector<pair<int,char>>player_River;
-    vector<pair<int,char>>opponent_River;
+//    vector<pair<int,char>>player_River;
+//    vector<pair<int,char>>opponent_River;
     cin>>flag;
 Label:    while (flag=="yes")
     {
+        vector<pair<int,char>>player_River;
+        vector<pair<int,char>>opponent_River;
         if((rand()%100)*1.0/101>=0.5){
             player.identity="bigblind";
             opponent.identity="smallblind";
@@ -616,7 +618,7 @@ Label:    while (flag=="yes")
                 if(your_judge=="yes"&&player.bonus>opponent.bet){
                     player.raise(pot,opponent);
                 }else{
-                    cout<<"you can't do that.arrange check"<<endl;
+                    //cout<<"you can't do that.arrange check"<<endl;
                     player.check();
                 }
             }
@@ -874,8 +876,8 @@ int main()
     jackPot pot;
     Round1(player,opponent,pot);
     //cout<<cal_winRate(player,River_Card);
-    // vector<pair<int, char>> test1_arr{{12, 'B'}, {6, 'D'}, {5, 'D'}, {3, 'A'}, {11, 'D'}, {1, 'D'}, {8, 'A'}};
-    // vector<pair<int, char>> test2_arr{{8, 'C'}, {11, 'B'}, {5, 'D'}, {3, 'A'}, {11, 'D'}, {1, 'D'}, {8, 'A'}};
+    // vector<pair<int, char>> test1_arr{{5, 'D'}, {7, 'A'}, {12, 'B'}, {2, 'C'}, {11, 'A'}, {3, 'C'}, {8, 'D'}};
+    // vector<pair<int, char>> test2_arr{{4, 'D'}, {12, 'D'}, {12, 'B'}, {2, 'C'}, {11, 'A'}, {3, 'C'}, {8, 'D'}};
     // show_River(test1_arr);
     // show_River(test2_arr);
     // cout << compare(test1_arr, test2_arr);

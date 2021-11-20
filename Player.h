@@ -108,7 +108,7 @@ public:
                 this->allin(pot);
                 plan="all in";
             }
-            else if(judge=="all in"){
+            else if(judge=="allin"){
                 this->allin(pot);
                 plan="all in";
             }
