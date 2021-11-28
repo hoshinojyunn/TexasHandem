@@ -232,6 +232,14 @@ void Round1(Player &player, Player &opponent, jackPot &pot) //游戏流程设计
     cin>>flag;
 Label:    while (flag=="yes")
     {
+        //判断双方筹码是否还有
+        if(player.bonus==0){
+            cout<<"your bonus are empty...Can't bet"<<endl;
+            exit(0);
+        }else if(opponent.bonus==0){
+            cout<<"opponent's bonus are empty.Can't bet"<<endl;
+            exit(0);
+        }
         vector<pair<int,char>>player_River;
         vector<pair<int,char>>opponent_River;
         if((rand()%100)*1.0/101>=0.5){
@@ -611,7 +619,7 @@ Label:    while (flag=="yes")
                 opponent.check();
                 cout << "opponent check" << endl;
             }
-            if(player.bet==opponent.bet){
+            if(player.bet==opponent.bet){  //机器做完决定 询问玩家是否继续raise
                 string your_judge;
                 cout<<"Would you wanna raise again?yes or no?";
                 cin>>your_judge;
@@ -764,15 +772,26 @@ Label:    while (flag=="yes")
                 clearPoker(player.Poker,opponent.Poker,River_Card);
                 break;
             }
+            /*玩家决定完成 机器是否再次raise*/
             if(player.bet==opponent.bet){
-                string your_judge;
-                cout<<"Would you wanna raise again?yes or no?";
-                cin>>your_judge;
-                if(your_judge=="yes"&&player.bonus>opponent.bet){
-                    player.raise(pot,opponent);
+//                string your_judge;
+//                cout<<"Would you wanna raise again?yes or no?";
+//                cin>>your_judge;
+//                if(your_judge=="yes"&&player.bonus>opponent.bet){
+//                    player.raise(pot,opponent);
+//                }else{
+//                    //cout<<"you can't do that.arrange check"<<endl;
+//                    player.check();
+//                }
+                auto machine_plan=machine_make_plan(opponent,player,River_Card,pot);
+                if(machine_plan=="raise"&&opponent.bonus>=player.bet){
+                    opponent.raise(pot,player);
+                    cout<<"opponent raise again"<<endl;
+                }else if(machine_plan=="raise"&&opponent.bonus<player.bet){
+                    opponent.allin(pot);
+                    cout<<"opponent all in"<<endl;
                 }else{
-                    cout<<"you can't do that.arrange check"<<endl;
-                    player.check();
+                    opponent.check();
                 }
             }
             while(player.bet!=opponent.bet){  //最后一轮必须判断二者赌注是否相等 不相等必须做出行动

@@ -66,11 +66,13 @@ public:
         }
         std::cout<<'\n';
     }
-    void fold(jackPot&pot,Player&opponent){  //弃牌  直接结束本轮游戏
+    int fold(jackPot&pot,Player&opponent){  //弃牌  直接结束本轮游戏
+        int lose=this->bet;
         opponent.bonus+=pot.total;
         opponent.bet=0;
         this->bet=0;
         pot.total=0;
+        return lose;
     }
     void allin(jackPot&pot){
         this->bet+=this->bonus;
